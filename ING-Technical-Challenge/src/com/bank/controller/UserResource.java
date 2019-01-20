@@ -78,7 +78,7 @@ public class UserResource {
 
 		//CHECKS IF MAJORITY OF TRANSACTIONS ARE DONE IN THE AFTERNOON
 		BigDecimal totalWithdrawals = user.getWithrawals(filteredTransactions).stream().map(Transaction::getTransactionAmount)
-				.reduce(BigDecimal.ZERO, BigDecimal::add);
+				.reduce(BigDecimal.ZERO, BigDecimal::add).abs();
 
 		//CHECKS IF BIG SPENDER
 		if (calculatePercentage(totalWithdrawals.doubleValue(), totalDeposit.doubleValue()) > 80) {

@@ -16,29 +16,35 @@ public class BankMain {
 
 		// call the object initialization
 		System.out.print("Enter customer ID: ");
-		int custId = scanner.nextInt();
+		String custIdString = scanner.next();
 
-		scanner.nextLine();
-		System.out.println("Month and Year in this format yyyy-mm (sample: 2019-01)");
-		System.out.print("Enter month and year: ");
-		String dateDuration = scanner.next();
+		try {
+			int custId = Integer.parseInt(custIdString);
+			scanner.nextLine();
+			System.out.println("Month and Year in this format yyyy-mm (sample: 2019-01)");
+			System.out.print("Enter month and year: ");
+			String dateDuration = scanner.next();
 
-		UserResource userResource = new UserResource(new UserDaoService());
-		User retrievedRecord = userResource.retrieveUser(custId, dateDuration);
+			UserResource userResource = new UserResource(new UserDaoService());
+			User retrievedRecord = userResource.retrieveUser(custId, dateDuration);
 
-		if (retrievedRecord != null) {
-			System.out.println("USER RECORD		:: " + retrievedRecord.toString());
+			if (retrievedRecord != null) {
+				System.out.println("USER RECORD		:: " + retrievedRecord.toString());
 
-			if (retrievedRecord.getTransactions() != null) {
-				System.out.println(
-						"CLASSIFICATION	:: " + userResource.getClassification(retrievedRecord, dateDuration));
+				if (retrievedRecord.getTransactions() != null) {
+					System.out.println(
+							"CLASSIFICATION	:: " + userResource.getClassification(retrievedRecord, dateDuration));
 
-				System.out.println("TRANSACTIONS	:: ");
-				userResource.retrieveUserTransactions(retrievedRecord, dateDuration);
+					System.out.println("TRANSACTIONS	:: ");
+					userResource.retrieveUserTransactions(retrievedRecord, dateDuration);
+				}
+				System.out.println("CURRENT BALANCE	:: "
+						+ retrievedRecord.getCurrentBalance(retrievedRecord.getTransactions()));
 			}
-			System.out.println(
-					"CURRENT BALANCE	:: " + retrievedRecord.getCurrentBalance(retrievedRecord.getTransactions()));
+		} catch (Exception e) {
+			System.out.print("Invalid input.");
 		}
+
 		scanner.close();
 
 		// call frame object
