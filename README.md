@@ -13,7 +13,7 @@ To run the application, follow these steps:
   
 **You may refer to the following documents for more details:
 
-1. How-to-Run.doc for screenshots of above steps on running the application.
-2. POT.doc for proof testing screenshots.
-3. Test-Data.jpg for the view of data that can be used for testing. 
+1. How-to-Run.docx for screenshots of above steps on running the application.
+2. POT.docx for proof testing screenshots.
+3. test-data.xlsx for the view of data that can be used for testing. 
 
